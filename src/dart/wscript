@@ -57,13 +57,17 @@
 #|
 import limbo
 import glob
+import ros
+import glog
 from waflib import Logs
 
+
 def build(bld):
-    dart_libs = 'TBB EIGEN BOOST LIMBO LIBCMAES NLOPT SFERES2 ROBOT_DART DART BOOST_DART THREADS SIMPLE_NN '
-    dart_libs_graphic = dart_libs + 'DART_GRAPHIC'
+    dart_libs = 'TBB EIGEN BOOST LIMBO LIBCMAES NLOPT SFERES2 ROBOT_DART DART PTHREAD SIMPLE_NN ROS GLOG CART_IMP_CONT CART_TRAJ_GEN'
+    dart_libs_graphic = 'ROBOT_DART_GRAPHIC ' + bld.env['magnum_libs'] + dart_libs
 
     path = bld.path.abspath()[:-len('src/dart')] + 'res'
+	# old: path = bld.path.abspath()[:-len('src/dart/blackdrops/exp/limbo/deps')] + 'res'
 
     if 'INCLUDES_ROBOT_DART' not in bld.get_env() or 'INCLUDES_DART' not in bld.get_env():
         Logs.pprint('YELLOW', 'Dart or robot_dart not found in your system. Will not build DART scenarios')
@@ -73,13 +77,16 @@ def build(bld):
 
     # Find new targets
     files = glob.glob(bld.path.abspath()+"/*.cpp")
-    new_targets = []
-    for f in files:
-        target_name = f[f.rfind('/')+1:-4]
-        new_targets.append(target_name)
+    dual_build_targets = ['learning_skills']
+    simu_targets = ['learning_skills_execution']
+    graphic_targets = ['play_learning_skills']
+    # TODO: Re-enable at one point. But is skipped for now to speed up compilation.
+    # for f in files:
+    #    target_name = f[f.rfind('/')+1:-4]
+    #    new_targets.append(target_name)
 
     # Compile new targets
-    for target in new_targets:
+    for target in dual_build_targets:
         limbo.create_variants(bld,
                         source=target+'.cpp',
                         includes='. ../../../../src ../ ../../include',
@@ -89,6 +96,29 @@ def build(bld):
                         cxxflags = cxxflags + ['-DRESPATH="' + path + '"'],
                         variants = ['SIMU'])
 
+        if bld.get_env()['BUILD_GRAPHIC'] == True:
+            limbo.create_variants(bld,
+                            source=target+'.cpp',
+                            includes='. ../../../../src ../ ../../include',
+                            target=target,
+                            uselib=dart_libs_graphic,
+                            uselib_local='limbo',
+                            cxxflags = cxxflags + ['-DRESPATH="' + path + '"'],
+                            variants = ['GRAPHIC'])
+
+    # Simu targets
+    for target in simu_targets:
+        limbo.create_variants(bld,
+                            source=target+'.cpp',
+                            includes='. ../../../../src ../ ../../include',
+                            target=target,
+                            uselib=dart_libs,
+                            uselib_local='limbo',
+                            cxxflags = cxxflags + ['-DRESPATH="' + path + '"'],
+                            variants = ['SIMU'])
+
+    # Graphic targets
+    for target in graphic_targets:
         if bld.get_env()['BUILD_GRAPHIC'] == True:
             limbo.create_variants(bld,
                             source=target+'.cpp',

@@ -1,0 +1,163 @@
+{
+    "learning_platform": "real",
+    "evals_per_param_config": 3,
+    "rewards": {
+        "FixedSuccessReward": {
+            "objective": "insertion_reward", 
+            "type": "FixedSuccessReward", 
+            "value": 8.0, 
+            "weight": 1.0, 
+            "per_time_step": true
+        }, 
+        "force_application": {
+            "objective": "force", 
+            "weight": 10.0, 
+            "negative": true, 
+            "type": "ForceApplicationReward"
+            }, 
+        "GoalDistanceTranslationReward": {
+            "goal": {
+                "y": 0.0, 
+                "x": -0.6, 
+                "z": 0.7
+            }, 
+            "weight": 50.0, 
+            "min_dist": 0.25, 
+            "width": 0.4, 
+            "link_name": "peg", 
+            "objective": "insertion_reward", 
+            "type": "GoalDistanceTranslationReward"
+        }, 
+        "linear_distance_to_box": {
+            "box": {
+                "y_min": -0.001, 
+                "y_max": 0.001, 
+                "z_max": 0.699, 
+                "z_min": 0.6, 
+                "x_max": -0.599, 
+                "x_min": -0.601
+            }, 
+            "weight": 0.15, 
+            "min_dist": 0.006, 
+            "negative": false, 
+            "width": 2.0, 
+            "link_name": "peg", 
+            "objective": "insertion_reward", 
+            "type": "LinearDistanceToBoxReward"
+        }
+    }, 
+    "optimizer": "hypermapper", 
+    "max_fun_evals": 50, 
+    "expected_reward_evals": 1, 
+    "scene": "peg", 
+    "robot": {
+        "collisions": "mesh", 
+        "tool": "peg_3mm", 
+        "setup_name": "bh_rss"
+    }, 
+    "optimizer_config": {
+        "models": {
+            "model": "gaussian_process"
+        }, 
+        "feasible_output": {
+            "enable_feasible_predictor": false
+        }, 
+        "design_of_experiment": {
+            "doe_type": "random sampling", 
+            "number_of_samples": 8
+        }, 
+        "input_parameters": {
+            "PathVelocity": {
+                "values": [
+                    0.0, 
+                    0.3
+                ], 
+                "parameter_type": "real",
+                "prior" : "custom_gaussian",
+                "custom_gaussian_prior_means": [0.1],
+                "custom_gaussian_prior_stds": [0.07]
+            },
+            "PathDistance": {
+                "values": [
+                    0.0, 
+                    0.03
+                ], 
+                "parameter_type": "real",
+                "prior" : "custom_gaussian",
+                "custom_gaussian_prior_means": [0.015],
+                "custom_gaussian_prior_stds": [0.01]
+            },
+            "Radius": {
+                "values": [
+                    0.0, 
+                    0.08
+                ], 
+                "parameter_type": "real",
+                "prior" : "custom_gaussian",
+                "custom_gaussian_prior_means": [0.02],
+                "custom_gaussian_prior_stds": [0.03]
+            },
+            "Force": {
+                "values": [
+                    -20, 
+                    -1.0
+                ], 
+                "parameter_type": "real",
+                "prior" : "custom_gaussian",
+                "custom_gaussian_prior_means": [-3],
+                "custom_gaussian_prior_stds": [4]
+            }
+        }
+    }, 
+    "threads": 1,
+    "application_name": "peg_insertion_task", 
+    "robot_init_states": {
+        "s3": [
+            0.5, 
+            0.17, 
+            -0.15, 
+            -1.72, 
+            1.09, 
+            1.42, 
+            -0.8
+        ], 
+        "s2": [
+            0.56, 
+            0.08, 
+            -0.15, 
+            -1.72, 
+            1.07, 
+            1.41, 
+            -0.69
+        ], 
+        "s1": [
+            0.7, 
+            0.2, 
+            -0.27, 
+            -1.46, 
+            1.09, 
+            1.47, 
+            -0.56
+        ], 
+        "s0": [
+            0.67, 
+            0.28, 
+            -0.27, 
+            -1.4, 
+            1.1, 
+            1.49, 
+            -0.58
+        ], 
+        "s4": [
+            0.52, 
+            0.26, 
+            -0.15, 
+            -1.55, 
+            1.09, 
+            1.44, 
+            -0.72
+        ]
+    }, 
+    "episode_length": 10, 
+    "domain_randomization": true
+}

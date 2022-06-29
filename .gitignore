@@ -4,3 +4,22 @@ params_*
 *.orig
 .clang-format
 .vscode
+deps
+install
+model_learn*
+*.dat
+*.bin
+# ignore the service header files since the configure script sets those
+include/skireil/ros_msgs/NextAction.h
+include/skireil/NextActionRequest.h
+include/skireil/NextActionResponse.h
+include/skireil/ros_msgs/SkirosNextAction.h
+include/skireil/SkirosNextActionRequest.h
+include/skireil/SkirosNextActionResponse.h
+include/skireil/ros_msgs/ManageSkirosWorker.h
+include/skireil/ManageSkirosWorkerRequest.h
+include/skireil/ManageSkirosWorkerResponse.h
+include/skireil/ParamFloat.h
+include/skireil/ParamInt.h
+include/skireil/ParamString.h
+vectorxd2bin

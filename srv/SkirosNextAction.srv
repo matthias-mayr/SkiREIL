@@ -1,0 +1,28 @@
+# REQUEST
+int16 START_TASK=1
+int16 TICK_TASK=2
+int16 STOP_TASK=3
+
+int16 type
+string skill_name
+ParamFloat[] params_float
+ParamInt[] params_int
+ParamString[] params_string
+sensor_msgs/JointState robot_state
+geometry_msgs/Pose ee_pose
+float64 sim_time
+---
+# RESPONSE
+sensor_msgs/JointState robot_state
+bool calculate_ee_target_pose
+geometry_msgs/Pose ee_target_pose
+geometry_msgs/Wrench ee_target_wrench
+geometry_msgs/Wrench cart_stiffness
+float64 nullspace_stiffness
+cartesian_trajectory_generator/OverlayMotionConf overlay
+float64 tool
+
+int16 SUCCESS=1
+int16 FAILURE=2
+int16 RUNNING=3
+int16 bt_response

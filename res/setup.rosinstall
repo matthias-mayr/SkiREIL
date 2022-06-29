@@ -1,0 +1,9 @@
+# Convenient installation of dependencies
+
+# SkiROS
+- git: {local-name: skiros2/skiros2, uri: 'git@git.cs.lth.se:robotlab/rvmi/skiros2.git', version: 'develop_rl'}
+- git: {local-name: skiros2/skiros2_std_lib, uri: 'https://github.com/RVMI/skiros2_std_lib', version: 'master'}
+
+# Robot setup
+- git: {local-name: libs/cartesian_impedance_controller, uri: 'git@git.cs.lth.se:robotlab/cartesian_impedance_controller.git', version: 'master'}
+- git: {local-name: libs/cartesian_trajectory_generator, uri: 'git@git.cs.lth.se:robotlab/cartesian_trajectory_generator.git', version: 'master'}

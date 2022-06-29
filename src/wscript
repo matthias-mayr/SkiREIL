@@ -57,6 +57,7 @@
 #|
 
 def build(bld):
-    bld.recurse('tutorials/')
-    bld.recurse('classic_control/')
+    # Disabled to speed up compilation and to be able to become incompatible with them.
+    # bld.recurse('tutorials/')
+    # bld.recurse('classic_control/')
     bld.recurse('dart/')

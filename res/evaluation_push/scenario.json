@@ -1,0 +1,123 @@
+{
+    "application_name": "push_task",
+    "threads": 6,
+    "max_fun_evals": 400,
+    "episode_length": 12,
+    "evals_per_param_config": 10,
+    "expected_reward_evals": 1,
+    "learning_platform": "sim",
+    "scene": "polyhedron",
+    "domain_randomization": true,
+    "optimizer": "hypermapper",
+    "optimizer_config":
+    {
+        "design_of_experiment": {
+            "doe_type": "random sampling",
+            "number_of_samples": 40
+        },
+        "input_parameters": {
+            "offset_x_start": {
+                "values": [
+                    0, 
+                    0.2
+                ], 
+                "parameter_type": "real"
+            }, 
+            "offset_y_start": {
+                "values": [
+                    0, 
+                    0.2
+                ], 
+                "parameter_type": "real"
+            },
+            "offset_x_goal": {
+                "values": [
+                    -0.2, 
+                    0
+                ], 
+                "parameter_type": "real"
+            }, 
+            "offset_y_goal": {
+                "values": [
+                    -0.2, 
+                    0
+                ], 
+                "parameter_type": "real"
+            }
+        },
+        "models": {
+            "model": "gaussian_process"
+        },
+        "feasible_output": {
+            "enable_feasible_predictor": false
+        }
+    },
+    "rewards": {
+        "EndEffectorReferencePosition": {
+            "objective": "force", 
+            "type": "EndEffectorReferencePosition",
+            "link_name": "peg",
+            "weight": 1.0,
+            "width": 0.4,
+            "min_dist": 0.25,
+            "negative": true
+            },
+        "GoalDistanceTranslationReward": {
+            "objective": "object_push",
+            "type": "GoalDistanceTranslationReward",
+            "weight": 1.0,
+            "link_name": "peg",
+            "width": 0.4,
+            "min_dist": 0.25,
+            "goal" : {
+                "x": -0.425,
+                "y": 0.1,
+                "z": 0.6
+            }
+        },
+        "ObjectPositionReward": {
+            "objective": "object_push",
+            "type": "ObjectPositionReward",
+            "weight": 6.0,
+            "link_name": "polyhedron_link",
+            "width": 0.4,
+            "min_dist": 0.25,
+            "start_index": 14,
+            "goal" : {
+                "position": {
+                    "x": -0.375,
+                    "y": 0.075,
+                    "z": 0.65
+                }
+            }
+        },
+        "ObjectOrientationReward": {
+            "objective": "object_push",
+            "type": "ObjectOrientationReward",
+            "weight": 2.0,
+            "link_name": "polyhedron_link",
+            "width": 0.4,
+            "min_dist": 0.25,
+            "start_index": 14,
+            "goal" : {
+                "orientation": {
+                    "x": 1,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                }
+            }
+        }
+    },
+    "robot": {
+        "setup_name": "bh_rss_polyhedron",
+        "tool": "peg_70mm_hr",
+        "collisions": "mesh"
+    },
+    "robot_init_states": {
+        "s0": [0.33, 0.89, -0.16, -1.39, 1.19, 1.39, -1.23],
+        "s1": [0.29, 0.85, -0.14, -1.87, 1.25, 1.25, -1.66],
+        "s2": [0.31, 1.15, -0.08, -1.63, 1.34, 1.17, -1.71],
+        "s3": [0.27, 1.34, -0.13, -1.47, 1.34, 1.23, -1.31]
+    }
+}

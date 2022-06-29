@@ -1,0 +1,90 @@
+//|
+//|    Copyright Inria July 2017
+//|    This project has received funding from the European Research Council (ERC) under
+//|    the European Union's Horizon 2020 research and innovation programme (grant
+//|    agreement No 637972) - see http://www.resibots.eu
+//|
+//|    Contributor(s):
+//|      - Matthias Mayr (matthias.mayr@cs.lth.se)
+//|      - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|      - Rituraj Kaushik (rituraj.kaushik@inria.fr)
+//|      - Roberto Rama (bertoski@gmail.com)
+//|
+//|
+//|    This software is governed by the CeCILL-C license under French law and
+//|    abiding by the rules of distribution of free software.  You can  use,
+//|    modify and/ or redistribute the software under the terms of the CeCILL-C
+//|    license as circulated by CEA, CNRS and INRIA at the following URL
+//|    "http://www.cecill.info".
+//|
+//|    As a counterpart to the access to the source code and  rights to copy,
+//|    modify and redistribute granted by the license, users are provided only
+//|    with a limited warranty  and the software's author,  the holder of the
+//|    economic rights,  and the successive licensors  have only  limited
+//|    liability.
+//|
+//|    In this respect, the user's attention is drawn to the risks associated
+//|    with loading,  using,  modifying and/or developing or reproducing the
+//|    software by the user in light of its specific status of free software,
+//|    that may mean  that it is complicated to manipulate,  and  that  also
+//|    therefore means  that it is reserved for developers  and  experienced
+//|    professionals having in-depth computer knowledge. Users are therefore
+//|    encouraged to load and test the software's suitability as regards their
+//|    requirements in conditions enabling the security of their systems and/or
+//|    data to be ensured and,  more generally, to use and operate it in the
+//|    same conditions as regards security.
+//|
+//|    The fact that you are presently reading this means that you have had
+//|    knowledge of the CeCILL-C license and that you accept its terms.
+//|
+#ifndef SKIREIL_REWARD_REWARD_HPP
+#define SKIREIL_REWARD_REWARD_HPP
+
+#include <Eigen/Core>
+#include <skireil/utils/json.hpp>
+
+namespace skireil {
+    namespace reward {
+
+        template <typename RolloutInfo>
+        struct Reward {
+            std::pair<double, bool> observe(RolloutInfo& info, const Eigen::VectorXd& from_state, const Eigen::VectorXd& action, const Eigen::VectorXd& to_state, bool keep = true)
+            {
+                return query(info, from_state, action, to_state);
+            }
+            // TODO: Make RolloutInfo const again
+            std::pair<double, bool> query(RolloutInfo& info, const Eigen::VectorXd& from_state, const Eigen::VectorXd& action, const Eigen::VectorXd& to_state) const
+            {
+                return (*this)(info, from_state, action, to_state);
+            }
+
+            bool learn() { return false; }
+
+            virtual bool configure(const nlohmann::json& conf, std::shared_ptr<robot_dart::Robot> robot, const std::vector<std::string>& robot_dof) = 0;
+
+            virtual std::pair<double, bool> operator()(RolloutInfo& info, const Eigen::VectorXd& from_state, const Eigen::VectorXd& action, const Eigen::VectorXd& to_state) const = 0;
+
+            std::string get_name() const {return _name;};
+
+            std::string get_key() const {return _key;};
+
+            double get_weight() const {return _weight;};
+
+            void set_name(std::string name) { _name = name;};
+
+            void set_key(std::string key) { _key = key;};
+
+            void set_weight(double weight) { _weight = weight;};
+
+            private:
+                std::string _name;
+                std::string _key;
+                double _weight{1.0};
+        };
+
+        template<typename T, typename RolloutInfo>
+        std::shared_ptr<Reward<RolloutInfo>>  createRewardFunction() { return std::make_shared<T>(); }
+    } // namespace reward
+} // namespace skireil
+
+#endif

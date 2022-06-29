@@ -1,0 +1,26 @@
+{
+    "Force": {
+        "parameter_default": 0.0,
+        "parameter_type": "real",
+        "values": [
+            0.0,
+            0.0
+        ]
+    },
+    "PathVelocity": {
+        "parameter_default": 0.0,
+        "parameter_type": "real",
+        "values": [
+            0.0,
+            0.0
+        ]
+    },
+    "Radius": {
+        "parameter_default": 0.0,
+        "parameter_type": "real",
+        "values": [
+            0.0,
+            0.0
+        ]
+    }
+}

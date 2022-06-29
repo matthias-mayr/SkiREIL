@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<!--|
+    Copyright Inria July 2017
+    This project has received funding from the European Research Council (ERC) under
+    the European Union's Horizon 2020 research and innovation programme (grant
+    agreement No 637972) - see http://www.resibots.eu
+
+    Contributor(s):
+      - Matthias Mayr (matthias.mayr@cs.lth.se)
+      - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+      - Rituraj Kaushik (rituraj.kaushik@inria.fr)
+      - Roberto Rama (bertoski@gmail.com)
+
+
+    This software is governed by the CeCILL-C license under French law and
+    abiding by the rules of distribution of free software.  You can  use,
+    modify and/ or redistribute the software under the terms of the CeCILL-C
+    license as circulated by CEA, CNRS and INRIA at the following URL
+    "http://www.cecill.info".
+
+    As a counterpart to the access to the source code and  rights to copy,
+    modify and redistribute granted by the license, users are provided only
+    with a limited warranty  and the software's author,  the holder of the
+    economic rights,  and the successive licensors  have only  limited
+    liability.
+
+    In this respect, the user's attention is drawn to the risks associated
+    with loading,  using,  modifying and/or developing or reproducing the
+    software by the user in light of its specific status of free software,
+    that may mean  that it is complicated to manipulate,  and  that  also
+    therefore means  that it is reserved for developers  and  experienced
+    professionals having in-depth computer knowledge. Users are therefore
+    encouraged to load and test the software's suitability as regards their
+    requirements in conditions enabling the security of their systems and/or
+    data to be ensured and,  more generally, to use and operate it in the
+    same conditions as regards security.
+
+    The fact that you are presently reading this means that you have had
+    knowledge of the CeCILL-C license and that you accept its terms.
+
+|-->
+<launch>
+    <arg name="robot_ontology_prefix" default="skiros" />
+    <arg name="robot_name" default="bh_robot_1" />
+    <arg name="deploy" default="true" />
+    <arg name="gui" default="false"/>
+    <arg name="verbose" default="false"/>
+    <arg name="debug" default="false"/>
+    <arg name="workspace_dir" default="$(find skiros2)/owl"/>
+    <!-- Change to test.turtle for integration test -->
+    <arg name="init_scene" default="scenes/rl_setup.turtle"/>
+    <arg name="skill_mgr_on" default="true"/>
+    <arg name="task_mgr_on" default="true"/>
+    <arg name="nr_workers" default="6"/>
+    <arg name="learning" default="true"/>
+    <!-- Change to json_skill for integration test -->
+    <arg name="skill_name" default="json_skill"/>
+
+    <arg if="$(arg learning)" name="learning_skill_suffix" default="_fake"/>
+    <arg unless="$(arg learning)" name="learning_skill_suffix" default=""/>
+
+    <arg name="libraries_list" default="[learning_skills, skiros2_std_skills]"/> 
+    <arg name="primitive_list" default="[mg_set_goal_position, ee_position_distance, ee_pose_distance, element_to_bb_pose, change_stiffness, apply_force, overlay_motion, skill_to_file, scene_to_file, separate_parameters, create_learning_scenario, json_skill, go_to_linear_threshold]"/>
+    <arg name="skill_list" default="[$(arg skill_name), push, obstacle_avoidance_exp_mg, peg_insertion, go_to_linear, go_to_linear_offset, task_plan, task_planning, complete_plan_learn]"/>
+    <arg name="memory_contexts" default="[]"/>
+
+    <node name="map2world" type="static_transform_publisher" pkg="tf" args="0 0 0 0 0 0 1 map world 100" />
+
+    <include file="$(find skiros2)/launch/world_model_server.launch">
+        <arg name="init_scene" value="$(arg init_scene)"/>
+        <arg name="verbose" value="$(arg verbose)"/>
+        <arg name="gui" value="$(arg gui)"/>
+        <arg name="reasoners_pkgs" value="[skiros2_std_reasoners]"/>
+        <arg name="load_contexts" value="$(arg memory_contexts)"/>
+        <arg name="workspace_dir" value="$(arg workspace_dir)"/>
+        <arg name="debug" value="$(arg debug)"/>
+        <arg name="deploy" value="$(arg deploy)"/>
+    </include>
+
+    <node name="worker_manager" type="skiros_worker_manager.py" pkg="skireil" output="screen">
+        <param if="$(arg learning)" name="nr_workers" value="$(arg nr_workers)"/>
+        <param unless="$(arg learning)" name="nr_workers" value="1"/>
+        <param name="verbose" value="$(arg verbose)"/>
+        <param name="skill_name" value="$(arg skill_name)"/>
+    </node>
+
+    <include if="$(arg task_mgr_on)" file="$(find skiros2)/launch/task_mgr.launch">
+        <arg name="deploy" value="$(arg deploy)"/>
+    </include>
+
+    <include file="$(find skireil)/launch/skiros_worker.launch">
+        <arg name="worker_nr" value="1"/>
+        <arg name="verbose" value="$(arg verbose)"/>
+        <arg name="debug" value="$(arg debug)"/>
+        <arg name="libraries_list" value="$(arg libraries_list)"/>
+        <arg name="primitive_list" value="$(arg primitive_list)"/>
+        <arg name="skill_list" value="$(arg skill_list)" />
+    </include>
+
+    <include file="$(find skireil)/launch/skiros_worker.launch">
+        <arg name="worker_nr" value="2"/>
+        <arg name="verbose" value="$(arg verbose)"/>
+        <arg name="debug" value="$(arg debug)"/>
+        <arg name="libraries_list" value="$(arg libraries_list)"/>
+        <arg name="primitive_list" value="$(arg primitive_list)"/>
+        <arg name="skill_list" value="$(arg skill_list)" />
+    </include>
+
+    <include file="$(find skireil)/launch/skiros_worker.launch">
+        <arg name="worker_nr" value="3"/>
+        <arg name="verbose" value="$(arg verbose)"/>
+        <arg name="debug" value="$(arg debug)"/>
+        <arg name="libraries_list" value="$(arg libraries_list)"/>
+        <arg name="primitive_list" value="$(arg primitive_list)"/>
+        <arg name="skill_list" value="$(arg skill_list)" />
+    </include>
+
+    <include file="$(find skireil)/launch/skiros_worker.launch">
+        <arg name="worker_nr" value="4"/>
+        <arg name="verbose" value="$(arg verbose)"/>
+        <arg name="debug" value="$(arg debug)"/>
+        <arg name="libraries_list" value="$(arg libraries_list)"/>
+        <arg name="primitive_list" value="$(arg primitive_list)"/>
+        <arg name="skill_list" value="$(arg skill_list)" />
+    </include>
+
+    <include file="$(find skireil)/launch/skiros_worker.launch">
+        <arg name="worker_nr" value="5"/>
+        <arg name="verbose" value="$(arg verbose)"/>
+        <arg name="debug" value="$(arg debug)"/>
+        <arg name="libraries_list" value="$(arg libraries_list)"/>
+        <arg name="primitive_list" value="$(arg primitive_list)"/>
+        <arg name="skill_list" value="$(arg skill_list)" />
+    </include>
+
+    <include file="$(find skireil)/launch/skiros_worker.launch">
+        <arg name="worker_nr" value="6"/>
+        <arg name="verbose" value="$(arg verbose)"/>
+        <arg name="debug" value="$(arg debug)"/>
+        <arg name="libraries_list" value="$(arg libraries_list)"/>
+        <arg name="primitive_list" value="$(arg primitive_list)"/>
+        <arg name="skill_list" value="$(arg skill_list)" />
+    </include>
+</launch>

@@ -1,0 +1,6 @@
+# Request
+bool request
+uint8 release
+---
+# Response
+uint8 worker_number

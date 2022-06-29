@@ -1,15 +1,24 @@
 [submodule "deps/limbo"]
 	path = deps/limbo
-	url = https://github.com/resibots/limbo.git
+	url = git@git.cs.lth.se:ma4027ma/limbo
 [submodule "deps/robot_dart"]
 	path = deps/robot_dart
 	url = https://github.com/resibots/robot_dart.git
 [submodule "deps/dart"]
 	path = deps/dart
 	url = https://github.com/dartsim/dart.git
-[submodule "deps/libcmaes"]
-	path = deps/libcmaes
-	url = https://github.com/resibots/libcmaes.git
-[submodule "deps/simple_nn"]
-	path = deps/simple_nn
-	url = https://github.com/resibots/simple_nn.git
+[submodule "deps/magnum"]
+	path = deps/magnum
+	url = https://github.com/mosra/magnum.git
+[submodule "deps/corrade"]
+	path = deps/corrade
+	url = https://github.com/mosra/corrade.git
+[submodule "deps/magnum-plugins"]
+	path = deps/magnum-plugins
+	url = https://github.com/mosra/magnum-plugins.git
+[submodule "deps/magnum-integration"]
+	path = deps/magnum-integration
+	url = https://github.com/mosra/magnum-integration.git
+[submodule "deps/hypermapper"]
+	path = deps/hypermapper
+	url = https://github.com/luinardi/hypermapper.git

@@ -1,0 +1,1 @@
+This folder will be populated with ROS msg definitions are the catkin package definition has been built and the "configure.sh" script was called.
