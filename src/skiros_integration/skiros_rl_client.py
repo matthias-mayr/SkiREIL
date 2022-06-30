@@ -365,7 +365,7 @@ class SkirosRlClient(object):
                 rospy.logwarn("Warning: Workaround for old skill. Not using 'json_skill'.")
                 skiros_skill_name = "obstacle_avoidance_exp_mg"
             skill = self.agent.get_skill(skiros_skill_name)
-            # Parameterize the skill with the ones that come from Black-DROPS
+            # Parameterize the skill with the ones that come from SkiREIL
             # Workaround to test the old setup:
             params = dict()
             for i in req.params_float:
