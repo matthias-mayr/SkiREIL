@@ -63,9 +63,9 @@ sudo apt-get install -y python-wstool python-catkin-tools python-rosdep python-p
 # Catkin setup
 mkdir -p $CATKIN_WS/src/skireil
 cd $CATKIN_WS
-git clone --recursive --branch $BRANCH git@git.cs.lth.se:robotlab/skireil.git src/skireil
+git clone --recursive --branch $BRANCH https://github.com/matthias-mayr/SkiREIL.git src/skireil
 
-# Black-DROPS dependencies
+# SkiREIL dependencies
 cd src/skireil
 scripts/installation/install_deps_all.sh
 
