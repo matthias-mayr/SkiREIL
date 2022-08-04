@@ -1,6 +1,6 @@
 [submodule "deps/limbo"]
 	path = deps/limbo
-	url = git@git.cs.lth.se:ma4027ma/limbo
+	url = https://git.cs.lth.se/ma4027ma/limbo.git
 [submodule "deps/robot_dart"]
 	path = deps/robot_dart
 	url = https://github.com/resibots/robot_dart.git

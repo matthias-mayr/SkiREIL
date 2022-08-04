@@ -28,7 +28,7 @@ In short it would work like this:
 ```
 git clone https://github.com/matthias-mayr/SkiREIL /tmp/skireil_installation
 cd ~
-/tmp/skireil_installation/scripts/installation/install_rss_setup.sh
+/tmp/skireil_installation/scripts/installation/install_skireil.sh
 ```
 ## Start learning with SkiROS support
 Open a terminal and enter:

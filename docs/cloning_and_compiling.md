@@ -5,10 +5,10 @@ The install script to install SkiREIL is in `scripts/installation/install_skirei
 
 Install with:
 ```bash
-sudo apt-get install -y git
+sudo apt-get install -y git lsb-release gnupg
 git clone https://github.com/matthias-mayr/SkiREIL /tmp/skireil_installation
 cd ~ # This is the folder into which it would be installed
-/tmp/skireil_installation/scripts/installation/install_rss_setup.sh
+/tmp/skireil_installation/scripts/installation/install_skireil.sh
 rm -rf /tmp/skireil_installation # The clone in /tmp is only needed to execute the script
 ```
 In order start experiments or recompile the `catkin` workspace, it is necessary to source the workspace in the `~/.bashrc` file. Add this line `source ~/Workspaces/skireil_ws/devel/setup.bash`. Adding can for example be done with:
