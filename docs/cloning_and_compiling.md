@@ -5,7 +5,7 @@ The install script to install SkiREIL is in `scripts/installation/install_skirei
 
 Install with:
 ```bash
-sudo apt-get install -y git lsb-release gnupg
+sudo apt-get install -y git
 git clone https://github.com/matthias-mayr/SkiREIL /tmp/skireil_installation
 cd ~ # This is the folder into which it would be installed
 /tmp/skireil_installation/scripts/installation/install_skireil.sh

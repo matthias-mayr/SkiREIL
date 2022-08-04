@@ -51,6 +51,9 @@ while [[ $# -gt 0 ]]; do
 done
 set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
 
+# System dependencies
+sudo apt-get install -y tmux sshfs wget lsb-release gnupg
+
 # Install ROS
 if [ "$ROS" = true ] ; then
     sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -58,7 +61,7 @@ if [ "$ROS" = true ] ; then
     sudo apt-get update
     sudo apt-get install -y ros-$ROS_DISTRO-ros-base
 fi
-sudo apt-get install -y python-wstool python-catkin-tools python-rosdep python-pip python-rosinstall tmux sshfs
+sudo apt-get install -y python-wstool python-catkin-tools python-rosdep python-pip python-rosinstall
 
 # Catkin setup
 mkdir -p $CATKIN_WS/src/skireil
