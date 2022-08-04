@@ -52,7 +52,7 @@ done
 set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
 
 # System dependencies
-sudo apt-get install -y tmux sshfs wget lsb-release gnupg
+sudo apt-get install -y tmux sshfs wget lsb-release gnupg software-properties-common
 
 # Install ROS
 if [ "$ROS" = true ] ; then
