@@ -51,6 +51,11 @@ while [[ $# -gt 0 ]]; do
 done
 set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
 
+# Workaround to make Gitlab CI use the correct public branch
+if [ "$BRANCH" = "skireil_public" ] ; then
+    BRANCH=main
+fi
+
 # System dependencies
 sudo apt-get install -y tmux sshfs wget lsb-release gnupg software-properties-common
 
