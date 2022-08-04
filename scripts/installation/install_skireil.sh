@@ -4,7 +4,7 @@ set -e
 CATKIN_WS=Workspaces/skireil_ws
 ROS=true
 COMPILE=true
-BRANCH=master
+BRANCH=main
 ROS_DISTRO=melodic
 
 POSITIONAL_ARGS=()
