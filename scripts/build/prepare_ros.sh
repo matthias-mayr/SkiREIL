@@ -11,8 +11,6 @@ rm ./deps/limbo/exp/skireil
 # Service message files need to be removed, otherwise ROS doesn't build them
 rm ./include/skireil/ManageSkirosWorkerRequest.h
 rm ./include/skireil/ManageSkirosWorkerResponse.h
-rm ./include/skireil/NextActionRequest.h
-rm ./include/skireil/NextActionResponse.h
 rm ./include/skireil/SkirosNextActionRequest.h
 rm ./include/skireil/SkirosNextActionResponse.h
 rm ./include/skireil/ParamFloat.h
