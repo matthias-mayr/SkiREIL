@@ -166,16 +166,16 @@ int main(int argc, char** argv)
     if (Params::skireil::optimizer() == "cma_es") {
         // TODO: Param fix. Adapt CMA-ES.
         // using policy_opt_t = limbo::opt::Cmaes<Params>;
-        // skireil::BlackDROPS<Params, MGP_t, SimpleArm, policy_t, policy_opt_t, RewardFunction> arm_system;
+        // skireil::SkiREIL<Params, MGP_t, SimpleArm, policy_t, policy_opt_t, RewardFunction> arm_system;
         // if (!Params::meta_conf::existing_data_folder().empty()) {
-        //     start_it = read_existing_data<Params,skireil::BlackDROPS<Params, MGP_t, SimpleArm, policy_t, policy_opt_t, RewardFunction>> (arm_system);
+        //     start_it = read_existing_data<Params,skireil::SkiREIL<Params, MGP_t, SimpleArm, policy_t, policy_opt_t, RewardFunction>> (arm_system);
         // }
         // arm_system.learn(start_it, iterations, true);
     } else {
         using policy_opt_t = skireil::opt::Hypermapper<Params>;
         start_it = get_iteration<Params>();
         Params::opt_hm::set_start_it(start_it);
-        using system_t = skireil::BlackDROPS<Params, MGP_t, SimpleArm, policy_t, policy_opt_t, reward_t, rolloutinfo_t>;
+        using system_t = skireil::SkiREIL<Params, MGP_t, SimpleArm, policy_t, policy_opt_t, reward_t, rolloutinfo_t>;
 
         system_t arm_system;
         arm_system.set_reward_functions(reward_functions);

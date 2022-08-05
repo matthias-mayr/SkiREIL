@@ -54,8 +54,8 @@ import skiros2_common.ros.utils as utils
 from control_msgs.msg import FollowJointTrajectoryGoal
 from std_msgs.msg import Float32
 
-from blackdrops.srv import ManageSkirosWorker
-from blackdrops.srv import ManageSkirosWorkerRequest, ManageSkirosWorkerResponse
+from skireil.srv import ManageSkirosWorker
+from skireil.srv import ManageSkirosWorkerRequest, ManageSkirosWorkerResponse
 from skiros_integration import skiros_rl_client
 
 

@@ -42,7 +42,7 @@
 
 #include <Eigen/binary_matrix.hpp>
 
-#include <blackdrops/model/base_model.hpp>
+#include <skireil/model/base_model.hpp>
 
 namespace skireil {
     namespace model {

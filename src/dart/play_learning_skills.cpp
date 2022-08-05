@@ -131,7 +131,7 @@ int main(int argc, char** argv)
     std::shared_ptr<reward_t> reward_functions = process_reward_config<reward_t>(Params::skireil::reward_config(), reward_function_map, global::global_robot);
     Params::skireil::set_objectives(skireil::utils::getKeys(*reward_functions));
 
-    using system_t = skireil::BlackDROPS<Params, MGP_t, SimpleArm, policy_t, policy_opt_t, reward_t, rolloutinfo_t>;
+    using system_t = skireil::SkiREIL<Params, MGP_t, SimpleArm, policy_t, policy_opt_t, reward_t, rolloutinfo_t>;
     system_t arm_system;
     arm_system.set_reward_functions(reward_functions);
     arm_system.set_scene_setup(get_scene<rolloutinfo_t, Params>(Params::skireil::scene()));

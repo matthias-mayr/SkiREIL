@@ -112,11 +112,11 @@ namespace skireil {
     };
 
     template <typename Params, typename Model, typename Robot, typename Policy, typename PolicyOptimizer, typename Reward, typename RolloutInfo, typename Evaluator = MeanEvaluator>
-    class BlackDROPS {
+    class SkiREIL {
     public:
-        BlackDROPS() : _best(-std::numeric_limits<double>::max()) {}
-        BlackDROPS(const PolicyOptimizer& optimizer) : _policy_optimizer(optimizer), _best(-std::numeric_limits<double>::max()) {}
-        ~BlackDROPS() {}
+        SkiREIL() : _best(-std::numeric_limits<double>::max()) {}
+        SkiREIL(const PolicyOptimizer& optimizer) : _policy_optimizer(optimizer), _best(-std::numeric_limits<double>::max()) {}
+        ~SkiREIL() {}
 
         // Checks if the asynchronous execution on the real system has happened based on the existence of the trajectory file.
         // Reads the file and processes the results.
@@ -298,14 +298,14 @@ namespace skireil {
             if (_boundary == 0) {
                 LOG(INFO) << "Running policy optimization with no boundaries... " << std::flush;
                 params_star = _policy_optimizer(
-                    std::bind(&BlackDROPS::_optimize_policy, this, std::placeholders::_1, std::placeholders::_2),
+                    std::bind(&SkiREIL::_optimize_policy, this, std::placeholders::_1, std::placeholders::_2),
                     params_starting,
                     false);
             }
             else {
                 LOG(INFO) << "Running policy optimization bounded to [-" << _boundary << ", " << _boundary << "]... " << std::flush;
                 params_star = _policy_optimizer(
-                    std::bind(&BlackDROPS::_optimize_policy, this, std::placeholders::_1, std::placeholders::_2),
+                    std::bind(&SkiREIL::_optimize_policy, this, std::placeholders::_1, std::placeholders::_2),
                     params_starting,
                     true);
             }

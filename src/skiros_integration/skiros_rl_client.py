@@ -62,7 +62,7 @@ from geometry_msgs.msg import Pose
 from sensor_msgs.msg import JointState
 from skiros2_common.core.params import ParamTypes
 
-from blackdrops.srv import SkirosNextAction, SkirosNextActionRequest, SkirosNextActionResponse
+from skireil.srv import SkirosNextAction, SkirosNextActionRequest, SkirosNextActionResponse
 
 # Translates SkiROS skill states to strings
 SkillStateDict = {0: 'unkown', SkillProgress.SUCCESS: 'success', SkillProgress.FAILURE: 'failure',

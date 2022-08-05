@@ -590,7 +590,7 @@ bool init_folder(std::string folder, std::string suffix = std::string()) {
 }
 
 void write_parameters_to_log() {
-    LOG(INFO) << "Blackdrops parameters:";
+    LOG(INFO) << "SkiREIL parameters:";
     LOG(INFO) << "  Stochastic rollouts = " << Params::skireil::stochastic();
     LOG(INFO) << "  max_fun_evals = " << Params::skireil::max_fun_evals();
     LOG(INFO) << "  Boundary = " << Params::skireil::boundary();
