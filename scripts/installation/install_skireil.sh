@@ -66,7 +66,7 @@ if [ "$ROS" = true ] ; then
     sudo apt-get update
     sudo apt-get install -y ros-$ROS_DISTRO-ros-base
 fi
-sudo apt-get install -y python-wstool python-catkin-tools python-rosdep python-pip python-rosinstall
+sudo apt-get install -y python-wstool python-catkin-tools python-rosdep python-pip python-rosinstall ros-$ROS_DISTRO-rosmon
 
 # Catkin setup
 mkdir -p $CATKIN_WS/src/skireil
