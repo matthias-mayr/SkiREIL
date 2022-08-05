@@ -52,10 +52,9 @@
     <param name="robot_description" textfile="$(find skireil)/res/URDF/iiwa_with_peg/iiwa_left_cad_3mm.urdf"/>
     <!-- <param name="robot_description_semantic" textfile="$(find bh_moveit)/config/bh_robot.srdf" /> -->
 
-    <include file="$(find bh_description)/launch/joint_state_publisher.launch">
-        <arg name="config" value="$(find bh_description)/config/jsp_config_piston_gripper.yaml"/>
-        <arg name="config" value="$(find skireil)/config/ros/jsp_config_bh.yaml"/>
-    </include>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <rosparam command="load" file="$(find skireil)/config/ros/jsp_config_bh.yaml" />
+    </node>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"></node>
 
     <!-- Rviz -->
