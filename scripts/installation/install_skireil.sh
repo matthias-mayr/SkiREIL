@@ -57,7 +57,7 @@ if [ "$BRANCH" = "skireil_public" ] ; then
 fi
 
 # System dependencies
-sudo apt-get install -y tmux sshfs wget lsb-release gnupg software-properties-common
+sudo apt-get install -y tmux sshfs wget lsb-release gnupg software-properties-common python-pip python3-pip
 
 # Install ROS
 if [ "$ROS" = true ] ; then
@@ -66,7 +66,7 @@ if [ "$ROS" = true ] ; then
     sudo apt-get update
     sudo apt-get install -y ros-$ROS_DISTRO-ros-base
 fi
-sudo apt-get install -y python-wstool python-catkin-tools python-rosdep python-pip python-rosinstall ros-$ROS_DISTRO-rosmon
+sudo apt-get install -y python-wstool python-catkin-tools python-rosdep python-rosinstall
 
 # Catkin setup
 mkdir -p $CATKIN_WS/src/skireil
@@ -106,6 +106,7 @@ make -j
 sudo make install
 cd ../..
 
+# Leaving 'depends' folder
 cd ..
 
 # Catkin setup
@@ -127,6 +128,16 @@ source devel/setup.bash
 # Python dependencies
 roscd skiros2
 cd .. && python -m pip install -r requirements.txt --user
+
+roscd skireil
+cd .. && python -m pip install -r requirements.txt --user
+
+# pip install hypermapper and its dependencies
+cd deps/hypermapper
+# Ignore system numpy installation if it exists
+python3 -m pip install --user numpy -I
+python3 -m pip install --user .
+cd ..
 
 # Compile skireil
 if [ "$COMPILE" = true ] ; then

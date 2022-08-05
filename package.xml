@@ -49,22 +49,23 @@
   <author email="costashatz@gmail.com">Konstantinos Chatzilygeroudis</author>
 
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>message_generation</build_depend>
+  <build_depend>cartesian_impedance_controller</build_depend>
+  <build_depend>cartesian_trajectory_generator</build_depend>
   <build_depend>eigen_conversions</build_depend>
   <build_depend>geometry_msgs</build_depend>
+  <build_depend>message_generation</build_depend>
   <build_depend>sensor_msgs</build_depend>
-  <build_depend>cartesian_trajectory_generator</build_depend>
-  <build_depend>cartesian_impedance_controller</build_depend>
 
-  <run_depend>message_runtime</run_depend>
+  <run_depend>cartesian_impedance_controller</run_depend>
+  <run_depend>cartesian_trajectory_generator</run_depend>
   <run_depend>eigen_conversions</run_depend>
   <run_depend>geometry_msgs</run_depend>
+  <run_depend>joint_state_publisher</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>rosmon</run_depend>
   <run_depend>sensor_msgs</run_depend>
   <run_depend>skiros2_msgs</run_depend>
-  <run_depend>cartesian_trajectory_generator</run_depend>
-  <run_depend>cartesian_impedance_controller</run_depend>
-  <run_depend>joint_state_publisher</run_depend>
-  <run_depend>robot_state_publisher</run_depend>
   
   <export>
   </export>
