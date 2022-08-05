@@ -57,7 +57,7 @@ if [ "$BRANCH" = "skireil_public" ] ; then
 fi
 
 # System dependencies
-sudo apt-get install -y tmux sshfs wget lsb-release gnupg software-properties-common python-pip python3-pip
+sudo apt-get install -y tmux sshfs wget lsb-release gnupg software-properties-common python-pip python3-pip python3-setuptools
 
 # Install ROS
 if [ "$ROS" = true ] ; then
