@@ -130,7 +130,7 @@ roscd skiros2
 cd .. && python -m pip install -r requirements.txt --user
 
 roscd skireil
-cd .. && python -m pip install -r requirements.txt --user
+python -m pip install -r requirements.txt --user
 
 # pip install hypermapper and its dependencies
 cd deps/hypermapper
