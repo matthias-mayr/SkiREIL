@@ -63,6 +63,8 @@
   <run_depend>skiros2_msgs</run_depend>
   <run_depend>cartesian_trajectory_generator</run_depend>
   <run_depend>cartesian_impedance_controller</run_depend>
+  <run_depend>joint_state_publisher</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
   
   <export>
   </export>
