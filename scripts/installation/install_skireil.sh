@@ -126,6 +126,7 @@ catkin build
 source devel/setup.bash
 
 # Python dependencies
+python -m pip install --user wheel
 roscd skiros2
 cd .. && python -m pip install -r requirements.txt --user
 
