@@ -243,8 +243,8 @@ def publisher(experiment):
         if k==start_k:
             for i in change_factor:
                 stiffness_msg = set_stiffness(configs[experiment+"_"+ str(k)], True, i)
-        pub_stiffness.publish(stiffness_msg)
-        sleep(0.3)  # sleep before changing the value again
+                pub_stiffness.publish(stiffness_msg)
+                rospy.sleep(0.3)  # sleep before changing the value again
         req_cur = set_fk()
         req_des = set_fk()
         target_pose_ac.wait_for_result()
@@ -274,10 +274,8 @@ def publisher(experiment):
             rospy.loginfo_throttle(1,"des_pose: %s", str(des_pose))
             if all(x < 0.1 for x in diff_pose):
                 rospy.loginfo("Reached %s", str(configs[experiment+"_"+ str(k)]))
-                for i in change_factor:
-                    stiffness_msg = set_stiffness(configs[experiment+"_"+ str(k)], False, i)
+                stiffness_msg = set_stiffness(configs[experiment+"_"+ str(k)], False, 1)
                 pub_stiffness.publish(stiffness_msg)
-                sleep(0.3)  # sleep before changing the value again
                 rospy.sleep(0.1)
                 break
         # Hack: Early abort for peg and push - should be re-implemented
@@ -286,7 +284,7 @@ def publisher(experiment):
         if experiment[:-1] == "peg" and k == 2:
             break
     # Wait for the trajectory generator to finish
-    sleep(1)
+    rospy.sleep(1)
     rospy.loginfo("End of reset script")
     exit()
 
